@@ -1,0 +1,120 @@
+Make java project
+make new java packege com.login
+
+CREATE JFRAME
+Inside it create new jform
+add a panel to it and set on jframe
+right click the jframe and SET LAYOUT absolutelayout
+make object for loginframe and import it
+	LoginFrame loginObj = new LoginFrame();
+        	loginObj.show();
+run	
+
+JFRAME CENTER
+jframe>properties>code>generate center
+
+add panel and give border
+goto sourcecode
+setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("login.png")));
+
+add java package for images
+
+make sign up jframe as well as login jframe
+
+click signup button and move to signup frame
+right click - action=actionperformed
+this.hide();//when click the button login page will hide
+SignupFrame signupObj = new SignupFrame();
+signupObj.show()
+
+create Home page
+
+make database 
+create table for signup
+
+make db connection with netbeans
+netbeans>services>drivers>addjdbc>goto ms sql server
+can edit user name password at sql server security>logins
+
+%%%%%%
+user name: sa
+password: TXInstitute
+JDBC URL : jdbc:sqlserver://localhost:1433;databaseName=TXInstitute
+
+schema : dbo
+Input connection name : jdbc:sqlserver://localhost:1433;databaseName=TXInstitute [sa on Default schema]
+
+Driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+%%%%%%
+
+create db.java
+public class DB {
+    public static Connection con = null;
+    public static void loadConnection(){
+        
+        String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        String url ="jdbc:sqlserver://localhost:1433;databaseName=TXInstitute";
+        String user = "sa";
+        String pass = "TXInstitute";
+        
+        try{
+            con = DriverManager.getConnection(url, user, pass);
+            
+            if (con != null){
+                JOptionPane.showMessageDialog(null, "database has been successfully connected..");
+            }
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "error in database loading " +e);
+        }
+    }
+}
+
+
+
+crud.applcation.java call the db -DB.loadConnection();
+add jdbc file to the library
+then run the project, see db has successfully connected
+
+
+insert signup data through the signup form
+create bean.class for create getter and setter for signup fields
+
+add signup.fields and add constructors, add getter setters
+
+change txt,btn names of form
+
+double click signup
+add fields
+	String FullName = txtFullName.getText();
+        String Email = txtEmail.getText();
+        String Password = txtPassword.getText();
+        
+        FieldsGetSet fieldsgetsetObj = new FieldsGetSet(FullName,Email,Password);
+
+create bal.class
+public class Bal {
+    
+    public void insertDataSignup(FieldsGetSet fieldsgetsetObj){
+        try{
+            
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(null, ""+e);
+        }
+    }
+    
+}
+
+create bal class object in signup button
+
+goto bal class and create query to insert data in sign up form
+
+make id auto increment in SQL
+ALTER TABLE signup DROP COLUMN SignupID
+ALTER TABLE signup ADD SignupID INT IDENTITY(1,1)
+
+login button
+get fata from fields
+
+create homefieldsgetset class
+to show setters and getters ,contructors, filds
